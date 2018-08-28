@@ -3,12 +3,15 @@ import Card from "./Card";
 
 export default class CardList extends Component {
 	state = {
+		page: "1",
 		pokemons: []
 	};
 
 	async componentDidMount() {
 		try {
-			const response = await fetch("http://localhost:3000/pokemon");
+			const response = await fetch(
+				"http://localhost:3000/pokemon?_page=1&_limit=20"
+			);
 			if (!response.ok) {
 				throw Error(response.statusText);
 			}
@@ -25,11 +28,11 @@ export default class CardList extends Component {
 		const { pokemons } = this.state;
 
 		return (
-			<ul>
+			<div className="row">
 				{pokemons.map(pokemon => (
-					<Card pokemon={pokemon} />
+					<Card key={pokemon.id} pokemon={pokemon} />
 				))}
-			</ul>
+			</div>
 		);
 	}
 }
