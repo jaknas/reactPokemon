@@ -7,3 +7,11 @@ The app uses:
 - Redux-thunk
 - json-server
 - Bootstrap
+
+To start the app, run:
+
+```bash
+* npm i
+* npm run start-server
+* npm start
+```
