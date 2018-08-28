@@ -6,7 +6,7 @@ export default ({ pokemon }) => {
 		color: "white",
 		borderRadius: "5px",
 		backgroundColor: "black",
-		textAling: "center"
+		textAlign: "center"
 	};
 	return (
 		<div className="card col-lg-3" style={{ width: "6rem" }}>

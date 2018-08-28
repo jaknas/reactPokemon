@@ -1,38 +1,36 @@
 import React, { Component } from "react";
 import Card from "./Card";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { getPokemon } from "../actions/pokemonActions";
 
-export default class CardList extends Component {
-	state = {
-		page: "1",
-		pokemons: []
-	};
-
-	async componentDidMount() {
-		try {
-			const response = await fetch(
-				"http://localhost:3000/pokemon?_page=1&_limit=20"
-			);
-			if (!response.ok) {
-				throw Error(response.statusText);
-			}
-			const json = await response.json();
-			this.setState({
-				pokemons: json
-			});
-		} catch (error) {
-			console.log(error);
-		}
+class CardList extends Component {
+	componentDidMount() {
+		this.props.getPokemon();
 	}
-
 	render() {
-		const { pokemons } = this.state;
+		const { pokemon } = this.props;
 
 		return (
 			<div className="row">
-				{pokemons.map(pokemon => (
+				{pokemon.map(pokemon => (
 					<Card key={pokemon.id} pokemon={pokemon} />
 				))}
 			</div>
 		);
 	}
 }
+
+CardList.propTypes = {
+	pokemon: PropTypes.array.isRequired,
+	getPokemon: PropTypes.func.isRequired
+};
+
+const mapStateToProps = state => ({
+	pokemon: state.pokemon.list
+});
+
+export default connect(
+	mapStateToProps,
+	{ getPokemon }
+)(CardList);
