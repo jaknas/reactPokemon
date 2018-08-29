@@ -6,7 +6,7 @@ import { getPokemon } from "../actions/pokemonActions";
 
 class CardList extends Component {
 	componentDidMount() {
-		this.props.getPokemon();
+		this.props.getPokemon(1);
 	}
 	render() {
 		const { pokemon } = this.props;
