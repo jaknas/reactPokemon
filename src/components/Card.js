@@ -1,30 +1,23 @@
 import React from "react";
+import PokemonType from "./PokemonType";
 
 export default ({ pokemon }) => {
-	let style = {
-		padding: "3px",
-		color: "white",
-		borderRadius: "5px",
-		backgroundColor: "black",
-		textAlign: "center"
-	};
 	return (
 		<div className="card col-lg-3" style={{ width: "6rem" }}>
 			<img
 				className="card-img-top mx-auto d-block"
 				src={pokemon.img}
 				alt="rendered pokemon"
-				style={{ width: "180px" }}
+				style={{ width: "180px", height: "180px" }}
 			/>
 			<div className="card-body">
 				<h5 className="card-title text-center">
-					#{pokemon.num} {pokemon.name}
+					<strong>
+						{" "}
+						#{pokemon.num} {pokemon.name}
+					</strong>
 				</h5>
-				{pokemon.type.map(type => (
-					<span key={type} className="mx-auto text-center" style={style}>
-						{type}{" "}
-					</span>
-				))}
+				<PokemonType pokemon={pokemon} />
 			</div>
 		</div>
 	);
