@@ -30,7 +30,13 @@ npm i
 
 Explain how to run the automated tests for this system
 
-TODO
+Type in terminal:
+
+```
+npm test
+```
+
+For now there are only included snapshot tests with enzyme, couldn't figure out **yet** how to deal with redux and stateful components (also low-key wanted to try [react-testing-library](https://github.com/kentcdodds/react-testing-library), maybe another time)
 
 ## Deployment
 
@@ -60,3 +66,4 @@ Go to http://localhost:3000 if not already redirected
 ## Acknowledgments
 
 - Shout out to [Zaven](https://zaven.co/) for an awesome idea for an app which made me wanna play Pokemon again
+  ![alt text](https://vignette.wikia.nocookie.net/fantendo/images/3/36/Pikachu_render_by_hikarichan95-d4jr57z.png/revision/latest?cb=20130113051633 "Pikachu")
