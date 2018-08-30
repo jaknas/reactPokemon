@@ -26,18 +26,6 @@ Install dependencies
 npm i
 ```
 
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-Type in terminal:
-
-```
-npm test
-```
-
-For now there are only included snapshot tests with enzyme, couldn't figure out **yet** how to deal with redux and stateful components (also low-key wanted to try [react-testing-library](https://github.com/kentcdodds/react-testing-library), maybe another time)
-
 ## Deployment
 
 Start the json-server first with:
@@ -53,6 +41,16 @@ npm start
 ```
 
 Go to http://localhost:3000 if not already redirected
+
+## Running the tests
+
+Type in terminal:
+
+```
+npm test
+```
+
+For now there are only included snapshot tests with enzyme, couldn't figure out **yet** how to deal with redux and stateful components (also low-key wanted to try [react-testing-library](https://github.com/kentcdodds/react-testing-library), maybe another time)
 
 ## Built With
 
