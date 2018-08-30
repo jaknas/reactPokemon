@@ -66,4 +66,4 @@ Go to http://localhost:3000 if not already redirected
 ## Acknowledgments
 
 - Shout out to [Zaven](https://zaven.co/) for an awesome idea for an app which made me wanna play Pokemon again
-  ![alt text](https://vignette.wikia.nocookie.net/fantendo/images/3/36/Pikachu_render_by_hikarichan95-d4jr57z.png/revision/latest?cb=20130113051633 "Pikachu")
+  ![alt text](http://www.emuinfo.pl/info/screeny/3/35195%5B6%5D.png "Pokemon Fire Red ")
