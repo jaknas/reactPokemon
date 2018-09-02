@@ -50,7 +50,9 @@ Type in terminal:
 npm test
 ```
 
-For now there are only included snapshot tests with enzyme, couldn't figure out **yet** how to deal with redux and stateful components (also low-key wanted to try [react-testing-library](https://github.com/kentcdodds/react-testing-library), maybe another time)
+~~For now there are only included snapshot tests with enzyme, couldn't figure out **yet** how to deal with redux and stateful components (also low-key wanted to try [react-testing-library](https://github.com/kentcdodds/react-testing-library), maybe another time)~~
+
+[react-testing-library](https://github.com/kentcdodds/react-testing-library) is live!
 
 ## Built With
 
