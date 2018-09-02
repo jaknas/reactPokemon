@@ -16,7 +16,10 @@ export default class Card extends Component {
 		const { pokemon } = this.props;
 		const { open } = this.state;
 		return (
-			<div className="card col-lg-3" style={{ width: "6rem" }}>
+			<div
+				className="card col-lg-3 col-md-4 col-sm-6 col-12"
+				style={{ width: "6rem" }}
+			>
 				<img
 					className="card-img-top mx-auto d-block"
 					src={pokemon.img}

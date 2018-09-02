@@ -87,7 +87,7 @@ export default ({ pokemon, open, toggle }) => {
 				</ModalBody>
 				<ModalFooter>
 					<Button color="secondary" onClick={toggle}>
-						Back
+						Go Back
 					</Button>
 				</ModalFooter>
 			</Modal>

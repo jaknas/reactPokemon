@@ -5,7 +5,8 @@ import { getPokemon } from "../actions/pokemonActions";
 
 class Pagination extends Component {
 	state = {
-		active: 1
+		active: 1,
+		numberOfPages: [1, 2, 3, 4, 5]
 	};
 
 	handleClick = e => {
@@ -15,35 +16,37 @@ class Pagination extends Component {
 		});
 	};
 
+	addNewPage = () => {
+		const { numberOfPages } = this.state;
+		this.setState({
+			numberOfPages: numberOfPages.concat([numberOfPages.length + 1])
+		});
+	};
+
 	render() {
+		const { active, numberOfPages } = this.state;
 		return (
 			<nav style={{ marginTop: "1rem" }}>
-				<ul className="pagination pagination-lg justify-content-center">
-					<li className={`page-item ${this.state.active === 1 && "active"}`}>
-						<a className="page-link" href="#header" onClick={this.handleClick}>
-							1
-						</a>
-					</li>
-					<li className={`page-item ${this.state.active === 2 && "active"}`}>
-						<a className="page-link" href="#header" onClick={this.handleClick}>
-							2
-						</a>
-					</li>
-					<li className={`page-item ${this.state.active === 3 && "active"}`}>
-						<a className="page-link" href="#header" onClick={this.handleClick}>
-							3
-						</a>
-					</li>
-					<li className={`page-item ${this.state.active === 4 && "active"}`}>
-						<a className="page-link" href="#header" onClick={this.handleClick}>
-							4
-						</a>
-					</li>
-					<li className={`page-item ${this.state.active === 5 && "active"}`}>
-						<a className="page-link" href="#header" onClick={this.handleClick}>
-							5
-						</a>
-					</li>
+				<ul className="pagination justify-content-center">
+					{numberOfPages.map(page => (
+						<li
+							className={`page-item ${active === page && "active"}`}
+							key={page}
+						>
+							<a
+								className="page-link"
+								href="#header"
+								onClick={this.handleClick}
+							>
+								{page}
+							</a>
+						</li>
+					))}
+					{numberOfPages.length < 8 ? (
+						<button className="btn btn-link" onClick={this.addNewPage}>
+							+
+						</button>
+					) : null}
 				</ul>
 			</nav>
 		);
