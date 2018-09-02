@@ -15,7 +15,8 @@ export default ({ pokemon }) => {
 		Fighting: "#b54",
 		Rock: "#ba6",
 		Ice: "#6cf",
-		Ghost: "#66b"
+		Ghost: "#66b",
+		Dragon: "#76e"
 	};
 
 	let style = {
