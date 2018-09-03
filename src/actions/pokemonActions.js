@@ -3,7 +3,7 @@ import { GET_POKEMON } from "./types";
 export const getPokemon = page => async dispatch => {
 	try {
 		const res = await fetch(
-			`http://localhost:3004/pokemon?_page=${page}&_limit=20`
+			`http://localhost:3004/pokemon?_page=${page}&_limit=24`
 		);
 		const json = await res.json();
 		dispatch({

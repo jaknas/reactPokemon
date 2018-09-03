@@ -17,24 +17,33 @@ export default class Card extends Component {
 		const { open } = this.state;
 		return (
 			<div
-				className="card col-lg-3 col-md-4 col-sm-6 col-12"
+				className="card col-xl-3 col-lg-3 col-md-4 col-sm-6 col-12 text-center"
 				style={{ width: "6rem" }}
 			>
 				<img
-					className="card-img-top mx-auto d-block"
+					className="card-img-top d-block mx-auto"
 					src={pokemon.img}
 					alt="rendered pokemon"
-					style={{ width: "180px", height: "180px" }}
+					style={{
+						padding: "10px",
+						minHeight: "250px"
+					}}
 				/>
-				<div className="card-body">
-					<h5 className="card-title text-center">
-						<strong>
+				<div
+					className="card-body mx-auto"
+					style={{ paddingTop: 0, paddingBottom: 0 }}
+				>
+					<h5
+						className="card-title text-center"
+						style={{ marginBottom: "3px" }}
+					>
+						<strong style={{ fontWeight: 600 }}>
 							{" "}
 							#{pokemon.num} {pokemon.name}
 						</strong>
 					</h5>
 					<PokemonType pokemon={pokemon} />
-					<div className="m-2 text-center">
+					<div className="text-center">
 						<button className="btn btn-link btn-sm" onClick={this.toggle}>
 							More
 						</button>

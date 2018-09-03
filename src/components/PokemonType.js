@@ -21,11 +21,8 @@ export default ({ pokemon }) => {
 
 	let style = {
 		color: "white",
-		padding: "1px 8px 4px 8px",
-		borderRadius: "10px",
-		margin: "2px",
-		border: "1px solid rgba(0,0,0,0.2)",
-		textShadow: "1px 1px 2px rgba(0,0,0,0.7)"
+		borderRadius: "5px",
+		margin: "4px"
 	};
 
 	return (
@@ -33,7 +30,7 @@ export default ({ pokemon }) => {
 			{pokemon.type.map(type => (
 				<span
 					key={type}
-					className="d-inline text-center"
+					className="d-inline text-center badge"
 					style={{
 						backgroundColor: typeColors[type],
 						...style
