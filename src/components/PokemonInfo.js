@@ -3,9 +3,10 @@ import {
   Button, Modal, ModalHeader, ModalBody, ModalFooter,
 } from 'reactstrap';
 import PropTypes from 'prop-types';
+import PokemonType from './PokemonType';
 
 const PokemonInfo = ({ pokemon, open, toggle }) => (
-  <div>
+  <React.Fragment>
     <Modal isOpen={open} toggle={toggle}>
       <ModalHeader toggle={toggle} className="text-center">
         <strong>{pokemon.name}</strong>{' '}
@@ -18,38 +19,30 @@ const PokemonInfo = ({ pokemon, open, toggle }) => (
       <ModalBody>
         <ul className="list-group">
           <li className="list-group-item">
-            Height:
-            {pokemon.height}
+            Height: <strong>{pokemon.height}</strong>
           </li>
           <li className="list-group-item">
-            Weight:
-            {pokemon.weight}
+            Weight: <strong>{pokemon.weight}</strong>
           </li>
           <li className="list-group-item">
-            Candy:
-            {pokemon.candy}
+            Candy: <strong>{pokemon.candy}</strong>
           </li>
           {pokemon.candy_count ? (
             <li className="list-group-item">
-              Candy count:
-              {pokemon.candy_count}
+              Candy count: <strong>{pokemon.candy_count}</strong>
             </li>
           ) : null}
           <li className="list-group-item">
-            Egg:
-            {pokemon.egg}
+            Egg: <strong>{pokemon.egg}</strong>
           </li>
           <li className="list-group-item">
-            Spawn chance:
-            {pokemon.spawn_chance}
+            Spawn chance: <strong>{pokemon.spawn_chance}</strong>
           </li>
           <li className="list-group-item">
-            Average spawns:
-            {pokemon.avg_spawns}
+            Average spawns: <strong>{pokemon.avg_spawns}</strong>
           </li>
           <li className="list-group-item">
-            Spawn Time:
-            {pokemon.spawn_time}
+            Spawn Time: <strong>{pokemon.spawn_time}</strong>
           </li>
           <ul className="list-group">
             {Array.isArray(pokemon.multipliers) ? (
@@ -67,11 +60,7 @@ const PokemonInfo = ({ pokemon, open, toggle }) => (
           </ul>
           <ul className="list-group">
             <strong>Weaknesses:</strong>
-            {pokemon.weaknesses.map(weakness => (
-              <li key={weakness} className="list-group-item">
-                {weakness}
-              </li>
-            ))}
+            <PokemonType variant={pokemon.weaknesses} group="li" />
           </ul>
           <ul className="list-group">
             {typeof pokemon.prev_evolution !== 'undefined' ? (
@@ -109,7 +98,7 @@ const PokemonInfo = ({ pokemon, open, toggle }) => (
         </Button>
       </ModalFooter>
     </Modal>
-  </div>
+  </React.Fragment>
 );
 
 PokemonInfo.propTypes = {

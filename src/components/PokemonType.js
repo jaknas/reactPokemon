@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const PokemonType = ({ pokemon }) => {
+const PokemonType = ({ variant, group }) => {
   const typeColors = {
     Grass: '#7c5',
     Poison: '#a59',
@@ -27,8 +27,33 @@ const PokemonType = ({ pokemon }) => {
   };
 
   return (
-    <div className="text-center">
-      {pokemon.type.map(type => (
+    <React.Fragment>
+      {group === 'li'
+        ? [...variant].map(type => (
+            <li
+              key={type}
+              className="list-group-item"
+              style={{
+                backgroundColor: typeColors[type],
+                ...style,
+              }}
+            >
+              {type}
+            </li>
+        ))
+        : [...variant].map(type => (
+            <span
+              key={type}
+              className="d-inline text-center badge"
+              style={{
+                backgroundColor: typeColors[type],
+                ...style,
+              }}
+            >
+              {type}
+            </span>
+        ))}
+      {/* {[...variant].map(type => (
         <span
           key={type}
           className="d-inline text-center badge"
@@ -39,12 +64,13 @@ const PokemonType = ({ pokemon }) => {
         >
           {type}
         </span>
-      ))}
-    </div>
+      ))} */}
+    </React.Fragment>
   );
 };
 PokemonType.propTypes = {
-  pokemon: PropTypes.object.isRequired,
+  variant: PropTypes.array.isRequired,
+  group: PropTypes.string.isRequired,
 };
 
 export default PokemonType;
