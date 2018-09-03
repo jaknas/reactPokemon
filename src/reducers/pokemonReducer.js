@@ -1,16 +1,16 @@
-import { GET_POKEMON } from "../actions/types";
+import { GET_POKEMON } from '../actions/types';
 
 const initialState = {
-	list: []
+  list: [],
 };
 
-export default function(state = initialState, action) {
-	switch (action.type) {
-		case GET_POKEMON:
-			return {
-				list: action.payload
-			};
-		default:
-			return state;
-	}
+export default function (state = initialState, action) {
+  switch (action.type) {
+    case GET_POKEMON:
+      return {
+        list: action.payload,
+      };
+    default:
+      return state;
+  }
 }
