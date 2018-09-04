@@ -11,9 +11,15 @@ class CardList extends Component {
     this.props.getPokemon(1);
   }
 
+  shouldComponentUpdate(nextProps) {
+    if (this.props.pokemon === nextProps.pokemon) {
+      return false;
+    }
+    return true;
+  }
+
   render() {
     const { pokemon, error, errorMessage } = this.props;
-
     return (
       <CardDeck
         style={{
