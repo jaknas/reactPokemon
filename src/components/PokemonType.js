@@ -53,18 +53,6 @@ const PokemonType = ({ variant, group }) => {
               {type}
             </span>
         ))}
-      {/* {[...variant].map(type => (
-        <span
-          key={type}
-          className="d-inline text-center badge"
-          style={{
-            backgroundColor: typeColors[type],
-            ...style,
-          }}
-        >
-          {type}
-        </span>
-      ))} */}
     </React.Fragment>
   );
 };

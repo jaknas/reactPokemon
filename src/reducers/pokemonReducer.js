@@ -6,6 +6,7 @@ import {
   CHANGE_CURRENT_PAGE,
   GET_PAGES_IS_LOADING,
   GET_PAGES_HAS_ERRORED,
+  GET_POKEMON_BY_ID,
 } from '../actions/types';
 
 const initialState = {
@@ -20,6 +21,7 @@ const initialState = {
   error: false,
   errorMessage: '',
   isLoading: false,
+  infoId: '',
 };
 
 export default function (state = initialState, action) {
@@ -40,6 +42,11 @@ export default function (state = initialState, action) {
       return {
         ...state,
         isLoading: action.isLoading,
+      };
+    case GET_POKEMON_BY_ID:
+      return {
+        ...state,
+        infoId: action.payload,
       };
     case GET_PAGES_COUNT:
       return {
