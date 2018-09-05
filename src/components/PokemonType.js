@@ -18,6 +18,9 @@ const PokemonType = ({ variant, group }) => {
     Ice: '#6cf',
     Ghost: '#66b',
     Dragon: '#76e',
+    Fairy: '#e9e',
+    Dark: '#754',
+    Steel: '#aab',
   };
 
   const style = {

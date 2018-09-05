@@ -3,6 +3,9 @@ import {
   GET_POKEMON_HAS_ERRORED,
   GET_POKEMON_IS_LOADING,
   GET_POKEMON_BY_ID,
+  GET_POKEMON_BY_ID_IS_LOADING,
+  GET_POKEMON_BY_ID_HAS_ERRORED,
+  GET_EVOLUTION_IMG,
 } from './types';
 
 export const getPokemonHasErrored = (bool, error) => ({
@@ -20,6 +23,19 @@ export const getPokemonSuccess = payload => ({ type: GET_POKEMON_SUCCESS, payloa
 
 export const getPokemonByIdQuery = payload => ({ type: GET_POKEMON_BY_ID, payload });
 
+export const getPokemonByIdIsLoading = bool => ({
+  type: GET_POKEMON_BY_ID_IS_LOADING,
+  isLoading: bool,
+});
+
+export const getPokemonByIdHasErrored = (bool, error) => ({
+  type: GET_POKEMON_BY_ID_HAS_ERRORED,
+  hasErrored: bool,
+  errorMessage: error,
+});
+
+export const sendEvolutionImg = payload => ({ type: GET_EVOLUTION_IMG, payload });
+
 export const getPokemon = page => async (dispatch) => {
   dispatch(getPokemonIsLoading(true));
   try {
@@ -32,11 +48,18 @@ export const getPokemon = page => async (dispatch) => {
 };
 
 export const getPokemonById = id => async (dispatch) => {
+  dispatch(getPokemonByIdIsLoading(true));
   try {
     const res = await fetch(`http://localhost:3004/pokemon?id=${id}`);
     const json = await res.json();
     dispatch(getPokemonByIdQuery(json[0]));
   } catch (error) {
-    dispatch(getPokemonHasErrored(true, error));
+    dispatch(getPokemonByIdHasErrored(true, error));
   }
+};
+
+export const getEvolutionImg = num => async (dispatch) => {
+  const res = await fetch(`http://localhost:3004/pokemon?num=${num}`);
+  const json = await res.json();
+  dispatch(sendEvolutionImg(json[0].img));
 };

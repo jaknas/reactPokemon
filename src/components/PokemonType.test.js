@@ -8,9 +8,7 @@ test('PokemonType renders provided types', () => {
   const mockPokemon = {
     type: ['red', 'green', 'blue'],
   };
-  const { getByText, container } = render(
-    <PokemonType pokemon={mockPokemon} />,
-  );
+  const { getByText, container } = render(<PokemonType variant={mockPokemon.type} group="span" />);
   const typeSpan = getByText('red');
   const allTypes = container.querySelectorAll('span');
   expect(allTypes.length).toBe(3);
