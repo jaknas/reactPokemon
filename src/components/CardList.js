@@ -40,14 +40,13 @@ class CardList extends Component {
 }
 
 CardList.defaultProps = {
-  error: false,
   errorMessage: '',
 };
 
 CardList.propTypes = {
   pokemon: PropTypes.array.isRequired,
   getPokemon: PropTypes.func.isRequired,
-  error: PropTypes.bool,
+  error: PropTypes.bool.isRequired,
   errorMessage: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
 };
 

@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getPokemonById } from '../actions/pokemonActions';
 import PokemonType from './PokemonType';
+import PokemonMap from './PokemonMap';
 
 class PokemonInfo extends React.Component {
   componentDidMount() {
@@ -19,8 +20,31 @@ class PokemonInfo extends React.Component {
     return true;
   }
 
+  listInfo = (pokemon) => {
+    // chop up pokemon object to arrays with key : value pairs
+    const pokemonEntries = Object.entries(pokemon);
+    if (pokemon.candy_count) {
+      // if there's candy_count in db, slice to contain only valuable info
+      const pokemonInfoCut = pokemonEntries.slice(5, 13);
+      // now map over k:v pairs and return JSX li tags. Also add styling
+      const listedInfo = pokemonInfoCut.map(([key, value]) => (
+        <li key={key} className="list-group-item" style={{ textTransform: 'capitalize' }}>
+          {key.split('_').join(' ')}: <strong>{value}</strong>
+        </li>
+      ));
+      return listedInfo;
+    }
+    return pokemonEntries.slice(5, 12).map(([key, value]) => (
+      <li key={key} className="list-group-item" style={{ textTransform: 'capitalize' }}>
+        {key.split('_').join(' ')}: <strong>{value}</strong>
+      </li>
+    ));
+  };
+
   render() {
-    const { open, toggle, pokemon } = this.props;
+    const {
+      open, toggle, pokemon, error, errorMessage,
+    } = this.props;
     return (
       <React.Fragment>
         <Modal isOpen={open} toggle={toggle}>
@@ -37,46 +61,11 @@ class PokemonInfo extends React.Component {
             />
           </ModalHeader>
           <ModalBody>
+            {error ? `Failed to fetch data: ${errorMessage}` : null}
             <ul className="list-group">
-              <li className="list-group-item">
-                Height: <strong>{pokemon.height}</strong>
-              </li>
-              <li className="list-group-item">
-                Weight: <strong>{pokemon.weight}</strong>
-              </li>
-              <li className="list-group-item">
-                Candy: <strong>{pokemon.candy}</strong>
-              </li>
-              {pokemon.candy_count ? (
-                <li className="list-group-item">
-                  Candy count: <strong>{pokemon.candy_count}</strong>
-                </li>
-              ) : null}
-              <li className="list-group-item">
-                Egg: <strong>{pokemon.egg}</strong>
-              </li>
-              <li className="list-group-item">
-                Spawn chance: <strong>{pokemon.spawn_chance}</strong>
-              </li>
-              <li className="list-group-item">
-                Average spawns: <strong>{pokemon.avg_spawns}</strong>
-              </li>
-              <li className="list-group-item">
-                Spawn Time: <strong>{pokemon.spawn_time}</strong>
-              </li>
+              {this.listInfo(pokemon)}
               <ul className="list-group">
-                {Array.isArray(pokemon.multipliers) ? (
-                  <React.Fragment>
-                    <strong>Multipliers:</strong>
-                  </React.Fragment>
-                ) : null}
-                {Array.isArray(pokemon.multipliers)
-                  ? pokemon.multipliers.map(multiplier => (
-                      <li key={multiplier} className="list-group-item">
-                        {multiplier}
-                      </li>
-                  ))
-                  : null}
+                <PokemonMap variant={pokemon.multipliers} title="Multipliers:" />
               </ul>
               <ul className="list-group">
                 <strong>Weaknesses:</strong>
@@ -85,32 +74,10 @@ class PokemonInfo extends React.Component {
                 ) : null}
               </ul>
               <ul className="list-group">
-                {typeof pokemon.prev_evolution !== 'undefined' ? (
-                  <React.Fragment>
-                    <strong>Previous Evolutions:</strong>
-                  </React.Fragment>
-                ) : null}
-                {typeof pokemon.prev_evolution !== 'undefined'
-                  ? pokemon.prev_evolution.map(evolution => (
-                      <li key={evolution.num} className="list-group-item">
-                        {evolution.name}
-                      </li>
-                  ))
-                  : null}
+                <PokemonMap variant={pokemon.prev_evolution} title="Previous Evolution:" />
               </ul>
               <ul className="list-group">
-                {typeof pokemon.next_evolution !== 'undefined' ? (
-                  <React.Fragment>
-                    <strong>Next Evolutions:</strong>
-                  </React.Fragment>
-                ) : null}
-                {typeof pokemon.next_evolution !== 'undefined'
-                  ? pokemon.next_evolution.map(evolution => (
-                      <li key={evolution.num} className="list-group-item">
-                        {evolution.name}
-                      </li>
-                  ))
-                  : null}
+                <PokemonMap variant={pokemon.next_evolution} title="Next Evolution:" />
               </ul>
             </ul>
           </ModalBody>
@@ -125,16 +92,24 @@ class PokemonInfo extends React.Component {
   }
 }
 
+PokemonInfo.defaultProps = {
+  errorMessage: '',
+};
+
 PokemonInfo.propTypes = {
   pokemon: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
   open: PropTypes.bool.isRequired,
   toggle: PropTypes.func.isRequired,
   getPokemonById: PropTypes.func.isRequired,
   id: PropTypes.number.isRequired,
+  error: PropTypes.bool.isRequired,
+  errorMessage: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
 };
 
 const mapStateToProps = state => ({
-  pokemon: state.pokemon.infoId,
+  pokemon: state.pokemon.idQuery.pokemon,
+  error: state.pokemon.idQuery.error,
+  errorMessage: state.pokemon.idQuery.errorMessage,
 });
 
 export default connect(

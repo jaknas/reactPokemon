@@ -7,6 +7,9 @@ import {
   GET_PAGES_IS_LOADING,
   GET_PAGES_HAS_ERRORED,
   GET_POKEMON_BY_ID,
+  GET_POKEMON_BY_ID_IS_LOADING,
+  GET_POKEMON_BY_ID_HAS_ERRORED,
+  GET_EVOLUTION_IMG,
 } from '../actions/types';
 
 const initialState = {
@@ -21,7 +24,13 @@ const initialState = {
   error: false,
   errorMessage: '',
   isLoading: false,
-  infoId: '',
+  idQuery: {
+    pokemon: '',
+    isLoading: false,
+    error: false,
+    errorMessage: {},
+  },
+  img: '',
 };
 
 export default function (state = initialState, action) {
@@ -43,10 +52,25 @@ export default function (state = initialState, action) {
         ...state,
         isLoading: action.isLoading,
       };
+    case GET_POKEMON_BY_ID_IS_LOADING:
+      return {
+        ...state,
+        idQuery: { ...state.idQuery, isLoading: action.isLoading },
+      };
+    case GET_POKEMON_BY_ID_HAS_ERRORED:
+      return {
+        ...state,
+        idQuery: {
+          ...state.idQuery,
+          isLoading: false,
+          error: action.hasErrored,
+          errorMessage: action.errorMessage,
+        },
+      };
     case GET_POKEMON_BY_ID:
       return {
         ...state,
-        infoId: action.payload,
+        idQuery: { ...state.idQuery, pokemon: action.payload, isLoading: false },
       };
     case GET_PAGES_COUNT:
       return {
@@ -63,6 +87,7 @@ export default function (state = initialState, action) {
         ...state,
         pagination: {
           ...state.pagination,
+          isLoading: false,
           error: action.hasErrored,
           errorMessage: action.errorMessage,
         },
@@ -71,6 +96,11 @@ export default function (state = initialState, action) {
       return {
         ...state,
         pagination: { ...state.pagination, currentPage: action.payload },
+      };
+    case GET_EVOLUTION_IMG:
+      return {
+        ...state,
+        img: action.payload,
       };
     default:
       return state;
