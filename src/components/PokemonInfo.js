@@ -5,7 +5,6 @@ import {
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getPokemonById } from '../actions/pokemonActions';
-import PokemonType from './PokemonType';
 import PokemonMap from './PokemonMap';
 
 class PokemonInfo extends React.Component {
@@ -21,12 +20,9 @@ class PokemonInfo extends React.Component {
   }
 
   listInfo = (pokemon) => {
-    // chop up pokemon object to arrays with key : value pairs
     const pokemonEntries = Object.entries(pokemon);
     if (pokemon.candy_count) {
-      // if there's candy_count in db, slice to contain only valuable info
       const pokemonInfoCut = pokemonEntries.slice(5, 13);
-      // now map over k:v pairs and return JSX li tags. Also add styling
       const listedInfo = pokemonInfoCut.map(([key, value]) => (
         <li key={key} className="list-group-item" style={{ textTransform: 'capitalize' }}>
           {key.split('_').join(' ')}: <strong>{value}</strong>
@@ -68,10 +64,7 @@ class PokemonInfo extends React.Component {
                 <PokemonMap variant={pokemon.multipliers} title="Multipliers:" />
               </ul>
               <ul className="list-group">
-                <strong>Weaknesses:</strong>
-                {typeof pokemon.weaknesses !== 'undefined' ? (
-                  <PokemonType variant={pokemon.weaknesses} group="li" />
-                ) : null}
+                <PokemonMap variant={pokemon.weaknesses} groupBy="li" title="Weaknesses:" />
               </ul>
               <ul className="list-group">
                 <PokemonMap variant={pokemon.prev_evolution} title="Previous Evolution:" />
@@ -110,6 +103,7 @@ const mapStateToProps = state => ({
   pokemon: state.pokemon.idQuery.pokemon,
   error: state.pokemon.idQuery.error,
   errorMessage: state.pokemon.idQuery.errorMessage,
+  img: state.pokemon.idQuery.img,
 });
 
 export default connect(
