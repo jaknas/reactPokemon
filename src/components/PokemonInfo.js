@@ -20,12 +20,9 @@ class PokemonInfo extends React.Component {
   }
 
   listInfo = (pokemon) => {
-    // chop up pokemon object to arrays with key : value pairs
     const pokemonEntries = Object.entries(pokemon);
     if (pokemon.candy_count) {
-      // if there's candy_count in db, slice to contain only valuable info
       const pokemonInfoCut = pokemonEntries.slice(5, 13);
-      // now map over k:v pairs and return JSX li tags. Also add styling
       const listedInfo = pokemonInfoCut.map(([key, value]) => (
         <li key={key} className="list-group-item" style={{ textTransform: 'capitalize' }}>
           {key.split('_').join(' ')}: <strong>{value}</strong>
