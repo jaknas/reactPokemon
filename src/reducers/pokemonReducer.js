@@ -9,7 +9,6 @@ import {
   GET_POKEMON_BY_ID,
   GET_POKEMON_BY_ID_IS_LOADING,
   GET_POKEMON_BY_ID_HAS_ERRORED,
-  GET_EVOLUTION_IMG,
 } from '../actions/types';
 
 const initialState = {
@@ -30,7 +29,6 @@ const initialState = {
     error: false,
     errorMessage: {},
   },
-  img: '',
 };
 
 export default function (state = initialState, action) {
@@ -96,11 +94,6 @@ export default function (state = initialState, action) {
       return {
         ...state,
         pagination: { ...state.pagination, currentPage: action.payload },
-      };
-    case GET_EVOLUTION_IMG:
-      return {
-        ...state,
-        img: action.payload,
       };
     default:
       return state;

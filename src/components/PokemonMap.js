@@ -1,9 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { getEvolutionImg } from '../actions/pokemonActions';
+import { typeColors, style } from '../helpers/styles';
 
-const PokemonMap = ({ variant, title }) => (
+const PokemonMap = ({ variant, title, groupBy }) => (
   <React.Fragment>
     {variant !== null && typeof variant !== 'undefined' ? (
       <React.Fragment>
@@ -21,7 +20,40 @@ const PokemonMap = ({ variant, title }) => (
       ? variant.map(evolution => (
           <li key={evolution.num} className="list-group-item">
             {evolution.name}
+            <img
+              src={`http://www.serebii.net/pokemongo/pokemon/${evolution.num}.png`}
+              style={{ width: 35, height: 35, marginLeft: 5 }}
+              alt="pokemon evolution"
+            />
           </li>
+      ))
+      : null}
+    {groupBy === 'li' && typeof variant !== 'undefined'
+      ? variant.map(type => (
+          <li
+            key={type}
+            className="list-group-item"
+            style={{
+              backgroundColor: typeColors[type],
+              ...style,
+            }}
+          >
+            {type}
+          </li>
+      ))
+      : null}
+    {groupBy === 'span' && typeof variant !== 'undefined'
+      ? variant.map(type => (
+          <span
+            key={type}
+            className="d-inline text-center badge"
+            style={{
+              backgroundColor: typeColors[type],
+              ...style,
+            }}
+          >
+            {type}
+          </span>
       ))
       : null}
   </React.Fragment>
@@ -29,24 +61,13 @@ const PokemonMap = ({ variant, title }) => (
 
 PokemonMap.defaultProps = {
   variant: undefined,
+  groupBy: undefined,
 };
 
 PokemonMap.propTypes = {
   variant: PropTypes.array,
   title: PropTypes.string.isRequired,
+  groupBy: PropTypes.string,
 };
 
-const mapStateToProps = state => ({
-  pokemon: state.pokemon.list,
-  isLoading: state.pokemon.isLoading,
-  error: state.pokemon.error,
-  errorMessage: state.pokemon.errorMessage,
-  img: state.pokemon.img,
-});
-
-export default connect(
-  mapStateToProps,
-  {
-    getEvolutionImg,
-  },
-)(PokemonMap);
+export default PokemonMap;

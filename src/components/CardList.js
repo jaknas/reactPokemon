@@ -33,7 +33,7 @@ class CardList extends Component {
         {pokemon.map(poke => (
           <CardNew key={poke.id} pokemon={poke} />
         ))}
-        <PaginationNew />
+        {!error ? <PaginationNew /> : null}
       </CardDeck>
     );
   }

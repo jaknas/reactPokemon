@@ -1,14 +1,20 @@
 import React from 'react';
 import { render, cleanup } from 'react-testing-library';
-import PokemonType from './PokemonType';
+import { Provider } from 'react-redux';
+import PokemonMap from './PokemonMap';
+import store from '../store';
 
 afterEach(cleanup);
 
-test('PokemonType renders provided types', () => {
+test('PokemonMap renders provided data', () => {
   const mockPokemon = {
     type: ['red', 'green', 'blue'],
   };
-  const { getByText, container } = render(<PokemonType variant={mockPokemon.type} group="span" />);
+  const { getByText, container } = render(
+    <Provider store={store}>
+      <PokemonMap variant={mockPokemon.type} groupBy="span" title="" />
+    </Provider>,
+  );
   const typeSpan = getByText('red');
   const allTypes = container.querySelectorAll('span');
   expect(allTypes.length).toBe(3);
