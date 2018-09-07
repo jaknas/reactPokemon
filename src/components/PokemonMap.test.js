@@ -12,11 +12,14 @@ test('PokemonMap renders provided data', () => {
   };
   const { getByText, container } = render(
     <Provider store={store}>
-      <PokemonMap variant={mockPokemon.type} groupBy="span" title="" />
+      <PokemonMap variant={mockPokemon.type} title="Multipliers" />
     </Provider>,
   );
   const typeSpan = getByText('red');
-  const allTypes = container.querySelectorAll('span');
+  const allTypes = container.querySelectorAll('li');
+  const headerTitle = getByText('Multipliers');
+
+  expect(headerTitle.textContent).toMatch('Multipliers');
   expect(allTypes.length).toBe(3);
   expect(typeSpan.textContent).toMatch('red');
 });
