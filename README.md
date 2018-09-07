@@ -57,7 +57,7 @@ npm test
 ## Built With
 
 - [React](https://github.com/facebook/react) - Dynamic UI, Component logic etc.
-- [Redux](https://github.com/reduxjs/redux) - Global state management
+- [Redux](https://github.com/reduxjs/redux) - Global state management (also implemented [redux-dev-tools](https://github.com/zalmoxisus/redux-devtools-extension)) 
 - [Bootstrap](https://github.com/twbs/bootstrap) - Styling
 - [Redux-thunk](https://github.com/reduxjs/redux-thunk) - Redux middleware for asynchronous action creator
 - [json-server](https://github.com/typicode/json-server) - Locally hosted JSON server
