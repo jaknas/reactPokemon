@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getPokemonById } from '../actions/pokemonActions';
 import PokemonMap from './PokemonMap';
+import PokemonType from './PokemonType';
 
 class PokemonInfo extends React.Component {
   componentDidMount() {
@@ -60,7 +61,8 @@ class PokemonInfo extends React.Component {
                 <PokemonMap variant={pokemon.multipliers} title="Multipliers:" />
               </ul>
               <ul className="list-group">
-                <PokemonMap variant={pokemon.weaknesses} groupBy="li" title="Weaknesses:" />
+                <strong>Weaknesses:</strong>
+                <PokemonType variant={pokemon.weaknesses} groupBy="li" />
               </ul>
               <ul className="list-group">
                 <PokemonMap variant={pokemon.prev_evolution} title="Previous Evolution:" />

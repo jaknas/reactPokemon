@@ -3,7 +3,7 @@ import {
   Card, CardImg, CardBody, CardTitle, Row, Col,
 } from 'reactstrap';
 import PropTypes from 'prop-types';
-import PokemonMap from './PokemonMap';
+import PokemonType from './PokemonType';
 import PokemonInfo from './PokemonInfo';
 
 class CardNew extends React.Component {
@@ -43,7 +43,7 @@ class CardNew extends React.Component {
                 </strong>
               </CardTitle>
               <div className="text-center">
-                <PokemonMap variant={pokemon.type} groupBy="span" title="" />
+                <PokemonType variant={pokemon.type} groupBy="span" />
               </div>
               {open ? <PokemonInfo id={pokemon.id} open={open} toggle={this.toggle} /> : null}
             </CardBody>
