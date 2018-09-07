@@ -3,7 +3,6 @@ import {
   Card, CardImg, CardBody, CardTitle, Row, Col,
 } from 'reactstrap';
 import PropTypes from 'prop-types';
-import { cardStyle } from '../helpers/styles';
 import PokemonMap from './PokemonMap';
 import PokemonInfo from './PokemonInfo';
 
@@ -24,7 +23,12 @@ class CardNew extends React.Component {
     return (
       <Row>
         <Col>
-          <Card body style={cardStyle} onClick={this.toggle}>
+          <Card
+            body
+            style={{ cursor: 'pointer' }}
+            className="d-flex align-items-center m-3"
+            onClick={this.toggle}
+          >
             <CardImg
               top
               width="100%"
@@ -33,12 +37,7 @@ class CardNew extends React.Component {
               style={{ height: '200px', width: '200px' }}
             />
             <CardBody style={{ paddingBottom: '0px', maxWidth: '210px' }}>
-              <CardTitle
-                style={{
-                  textAlign: 'center',
-                  marginBottom: '5px',
-                }}
-              >
+              <CardTitle className="text-center" style={{ marginBottom: '5px' }}>
                 <strong style={{ fontWeight: 600 }}>
                   #{pokemon.num} {pokemon.name}
                 </strong>

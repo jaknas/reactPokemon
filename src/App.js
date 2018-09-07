@@ -6,12 +6,14 @@ import CardList from './components/CardList';
 import Header from './components/Header';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
+import PaginationNew from './components/PaginationNew';
 
 const App = () => (
   <Provider store={store}>
     <Container>
       <Header name="Pokemon List" />
       <CardList />
+      <PaginationNew />
     </Container>
   </Provider>
 );

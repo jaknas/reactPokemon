@@ -12,13 +12,6 @@ class PokemonInfo extends React.Component {
     this.props.getPokemonById(this.props.id);
   }
 
-  shouldComponentUpdate(nextProps) {
-    if (this.props.pokemon.id === nextProps.pokemon.id) {
-      return false;
-    }
-    return true;
-  }
-
   listInfo = (pokemon) => {
     // chop up pokemon object to arrays with key : value pairs
     const pokemonEntries = Object.entries(pokemon);
@@ -27,14 +20,14 @@ class PokemonInfo extends React.Component {
       const pokemonInfoCut = pokemonEntries.slice(5, 13);
       // now map over k:v pairs and return JSX li tags. Also add styling
       const listedInfo = pokemonInfoCut.map(([key, value]) => (
-        <li key={key} className="list-group-item" style={{ textTransform: 'capitalize' }}>
+        <li key={key} className="list-group-item text-capitalize">
           {key.split('_').join(' ')}: <strong>{value}</strong>
         </li>
       ));
       return listedInfo;
     }
     return pokemonEntries.slice(5, 12).map(([key, value]) => (
-      <li key={key} className="list-group-item" style={{ textTransform: 'capitalize' }}>
+      <li key={key} className="list-group-item text-capitalize">
         {key.split('_').join(' ')}: <strong>{value}</strong>
       </li>
     ));
