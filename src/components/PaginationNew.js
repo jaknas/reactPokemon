@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Pagination, PaginationItem, PaginationLink } from 'reactstrap';
+import {
+  Pagination, PaginationItem, PaginationLink, Row, Col,
+} from 'reactstrap';
 import PropTypes from 'prop-types';
 import { getPokemon } from '../actions/pokemonActions';
 import { getPages, changePageNumber } from '../actions/paginationActions';
@@ -53,26 +55,33 @@ class PaginationNew extends Component {
   render() {
     const { numberOfPages, currentPage } = this.props;
     return (
-      <Pagination>
-        <PaginationItem onClick={this.handlePrevious} disabled={currentPage === numberOfPages[0]}>
-          <PaginationLink previous href="#" />
-        </PaginationItem>
-        {numberOfPages
-          ? numberOfPages.map(page => (
-              <PaginationItem key={page} active={currentPage === page}>
-                <PaginationLink key={page} value={page} onClick={this.handleClick}>
-                  {page}
-                </PaginationLink>
-              </PaginationItem>
-          ))
-          : null}
-        <PaginationItem
-          onClick={this.handleNext}
-          disabled={currentPage === numberOfPages[numberOfPages.length - 1]}
-        >
-          <PaginationLink next href="#" />
-        </PaginationItem>
-      </Pagination>
+      <Row>
+        <Col>
+          <Pagination className="d-flex justify-content-center">
+            <PaginationItem
+              onClick={this.handlePrevious}
+              disabled={currentPage === numberOfPages[0]}
+            >
+              <PaginationLink previous href="#" />
+            </PaginationItem>
+            {numberOfPages
+              ? numberOfPages.map(page => (
+                  <PaginationItem key={page} active={currentPage === page}>
+                    <PaginationLink key={page} value={page} onClick={this.handleClick}>
+                      {page}
+                    </PaginationLink>
+                  </PaginationItem>
+              ))
+              : null}
+            <PaginationItem
+              onClick={this.handleNext}
+              disabled={currentPage === numberOfPages[numberOfPages.length - 1]}
+            >
+              <PaginationLink next href="#" />
+            </PaginationItem>
+          </Pagination>
+        </Col>
+      </Row>
     );
   }
 }

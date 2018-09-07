@@ -24,11 +24,3 @@ export const style = {
   borderRadius: '5px',
   margin: '4px',
 };
-
-export const cardStyle = {
-  marginBottom: '15px',
-  marginTop: '15px',
-  display: 'flex',
-  alignItems: 'center',
-  cursor: 'pointer',
-};

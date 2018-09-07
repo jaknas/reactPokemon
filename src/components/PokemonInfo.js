@@ -6,17 +6,11 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getPokemonById } from '../actions/pokemonActions';
 import PokemonMap from './PokemonMap';
+import PokemonType from './PokemonType';
 
 class PokemonInfo extends React.Component {
   componentDidMount() {
     this.props.getPokemonById(this.props.id);
-  }
-
-  shouldComponentUpdate(nextProps) {
-    if (this.props.pokemon.id === nextProps.pokemon.id) {
-      return false;
-    }
-    return true;
   }
 
   listInfo = (pokemon) => {
@@ -24,14 +18,14 @@ class PokemonInfo extends React.Component {
     if (pokemon.candy_count) {
       const pokemonInfoCut = pokemonEntries.slice(5, 13);
       const listedInfo = pokemonInfoCut.map(([key, value]) => (
-        <li key={key} className="list-group-item" style={{ textTransform: 'capitalize' }}>
+        <li key={key} className="list-group-item text-capitalize">
           {key.split('_').join(' ')}: <strong>{value}</strong>
         </li>
       ));
       return listedInfo;
     }
     return pokemonEntries.slice(5, 12).map(([key, value]) => (
-      <li key={key} className="list-group-item" style={{ textTransform: 'capitalize' }}>
+      <li key={key} className="list-group-item text-capitalize">
         {key.split('_').join(' ')}: <strong>{value}</strong>
       </li>
     ));
@@ -64,7 +58,8 @@ class PokemonInfo extends React.Component {
                 <PokemonMap variant={pokemon.multipliers} title="Multipliers:" />
               </ul>
               <ul className="list-group">
-                <PokemonMap variant={pokemon.weaknesses} groupBy="li" title="Weaknesses:" />
+                <strong>Weaknesses:</strong>
+                <PokemonType variant={pokemon.weaknesses} groupBy="li" />
               </ul>
               <ul className="list-group">
                 <PokemonMap variant={pokemon.prev_evolution} title="Previous Evolution:" />
