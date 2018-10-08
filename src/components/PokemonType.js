@@ -35,7 +35,7 @@ const PokemonType = ({ variant, groupBy }) => (
   </React.Fragment>
 );
 PokemonType.propTypes = {
-  variant: PropTypes.array.isRequired,
+  variant: PropTypes.array,
   groupBy: PropTypes.string.isRequired,
 };
 
